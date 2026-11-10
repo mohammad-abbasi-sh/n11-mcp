@@ -1,5 +1,8 @@
 # n11-mcp 🇹🇷
 
+> ⚠️ **Durum: KISMEN BOZUK (2026-11-10)** — n11.com'un bot duvarı arama yolunu (/arama) zaman zaman engelliyor (yaklaşık 3 aramada 1 başarılı; parmak izi dönüşü ana sayfayı kurtardı). Ana sayfa, kategoriler ve sağlık kontrolü güvenilir çalışıyor. Arama ve fiyat araçları "engellendi — daha sonra tekrar deneyin" hatası verebilir; tekrar denemek bazen işe yarar. Canlı durum için `n11_health` kullanın.
+
+
 mcp-name: io.github.mohammad-abbasi-sh/n11-mcp
 
 Türkiye'nin 3 numaralı pazaryeri **n11.com** için resmi olmayan,
