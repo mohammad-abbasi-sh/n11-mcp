@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime, timezone
 
 from mcp.server.fastmcp import FastMCP
 
@@ -29,8 +30,24 @@ Built by Mohammad Abbasi (mohammad-abbasi-sh) — https://almanibama.ir · https
 """
 
 
+_SOURCE = "n11.com"
+_DISCLAIMER = "Unofficial read-only data from n11.com; verify on the site before acting on it."
+
+
+def _envelope() -> dict:
+    return {
+        "fetched_at": datetime.now(timezone.utc).isoformat(),
+        "source": _SOURCE,
+        "disclaimer": _DISCLAIMER,
+    }
+
+
+def _ok(payload: dict) -> str:
+    return json.dumps({**_envelope(), **payload}, ensure_ascii=False)
+
+
 def _err(e: Exception) -> str:
-    return json.dumps({"error": str(e)}, ensure_ascii=False)
+    return _ok({"error": str(e)})
 
 
 def _validate_limit(limit: int) -> int:
@@ -58,11 +75,8 @@ def n11_search(query: str, limit: int = 10, sort: str = "relevance", page: int =
         rows = _P.parse_search_results(html, limit=limit)
     except (ValueError, _http.N11Error) as e:
         return _err(e)
-    return json.dumps(
-        {"query": query.strip(), "sort": sort, "page": page,
-         "count": len(rows), "products": rows},
-        ensure_ascii=False,
-    )
+    return _ok({"query": query.strip(), "sort": sort, "page": page,
+         "count": len(rows), "products": rows})
 
 
 @mcp.tool()
@@ -78,7 +92,7 @@ def n11_product_detail(product: str) -> str:
         detail = _P.parse_product_detail(html)
     except (ValueError, _http.N11Error) as e:
         return _err(e)
-    return json.dumps(detail, ensure_ascii=False)
+    return _ok(detail)
 
 
 @mcp.tool()
@@ -90,7 +104,7 @@ def n11_list_categories() -> str:
         cats = _P.parse_categories(html)
     except _http.N11Error as e:
         return _err(e)
-    return json.dumps({"count": len(cats), "categories": cats}, ensure_ascii=False)
+    return _ok({"count": len(cats), "categories": cats})
 
 
 @mcp.tool()
@@ -108,9 +122,7 @@ def n11_price_stats(query: str, limit: int = 24, sort: str = "relevance") -> str
         stats = _P.price_stats(rows)
     except (ValueError, _http.N11Error) as e:
         return _err(e)
-    return json.dumps(
-        {"query": query.strip(), "sort": sort, **stats}, ensure_ascii=False
-    )
+    return _ok({"query": query.strip(), "sort": sort, **stats})
 
 
 @mcp.tool()
@@ -125,10 +137,17 @@ def n11_product_reviews(product: str, limit: int = 5) -> str:
         reviews = _P.parse_reviews(html, limit=limit)
     except (ValueError, _http.N11Error) as e:
         return _err(e)
-    return json.dumps(
-        {"product": product, "count": len(reviews), "reviews": reviews},
-        ensure_ascii=False,
-    )
+    return _ok({"product": product, "count": len(reviews), "reviews": reviews})
+
+
+@mcp.tool()
+def n11_health() -> str:
+    """Check whether n11.com is reachable right now.
+
+    Returns status ok (HTTP 200), blocked (HTTP 403/429 — bot wall or
+    rate limit) or error, plus the HTTP status and the probed URL.
+    One polite request; it does not fetch any listings."""
+    return _ok(_http.health_check())
 
 
 def main() -> None:
