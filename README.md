@@ -18,7 +18,7 @@ Add to your MCP client config (stdio):
   "mcpServers": {
     "n11": {
       "command": "uvx",
-      "args": ["n11-mcp==0.1.0"]
+      "args": ["n11-mcp==0.1.1"]
     }
   }
 }
@@ -82,9 +82,9 @@ no API key.
 ## Install
 
 ```bash
-uvx n11-mcp==0.1.0        # run directly (needs uv)
+uvx n11-mcp==0.1.1        # run directly (needs uv)
 # or
-pip install n11-mcp==0.1.0
+pip install n11-mcp==0.1.1
 n11-mcp            # starts the MCP server on stdio
 ```
 
