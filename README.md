@@ -1,5 +1,8 @@
 # n11-mcp 🇹🇷
 
+> ⚠️ **Status: PARTIALLY DEGRADED (2026-11-10)** — n11.com's bot wall intermittently blocks the search path (/arama) from this environment (about 1 in 3 searches succeed; fingerprint rotation recovered the homepage). Homepage, categories and health checks work reliably. Search and price-stats tools may return a "blocked — try again later" error; retrying sometimes succeeds. Check `n11_health` for the live status.
+
+
 mcp-name: io.github.mohammad-abbasi-sh/n11-mcp
 
 Unofficial **read-only** MCP server for **n11.com**, Türkiye's #3 marketplace — search millions of products, read product details (price, list price, stock, rating, seller, category), read customer reviews, browse the 11 top categories, and get price statistics (min / median / mean / max) for any query.
