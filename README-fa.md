@@ -20,7 +20,7 @@ mcp-name: io.github.mohammad-abbasi-sh/n11-mcp
   "mcpServers": {
     "n11": {
       "command": "uvx",
-      "args": ["n11-mcp"]
+      "args": ["n11-mcp==0.1.0"]
     }
   }
 }
@@ -64,9 +64,9 @@ JSON-LD از نوع Product به‌همراه مسیر دسته (breadcrumb) و 
 ## نصب
 
 ```bash
-uvx n11-mcp        # اجرای مستقیم (نیازمند uv)
+uvx n11-mcp==0.1.0        # اجرای مستقیم (نیازمند uv)
 # یا
-pip install n11-mcp
+pip install n11-mcp==0.1.0
 n11-mcp            # اجرای سرور MCP روی stdio
 ```
 
