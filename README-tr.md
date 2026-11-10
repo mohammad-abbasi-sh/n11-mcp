@@ -23,7 +23,7 @@ MCP istemci yapılandırmanıza ekleyin (stdio):
   "mcpServers": {
     "n11": {
       "command": "uvx",
-      "args": ["n11-mcp==0.1.0"]
+      "args": ["n11-mcp==0.1.1"]
     }
   }
 }
@@ -67,9 +67,9 @@ gerekmez, API anahtarı gerekmez.
 ## Kurulum
 
 ```bash
-uvx n11-mcp==0.1.0        # doğrudan çalıştır (uv gerekir)
+uvx n11-mcp==0.1.1        # doğrudan çalıştır (uv gerekir)
 # veya
-pip install n11-mcp==0.1.0
+pip install n11-mcp==0.1.1
 n11-mcp            # MCP sunucusunu stdio üzerinde başlatır
 ```
 
